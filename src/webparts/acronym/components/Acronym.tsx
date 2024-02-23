@@ -2,9 +2,8 @@ import * as React from 'react';
 import type { IAcronymProps } from './IAcronymProps';
 import styles from './Acronym.module.scss'
 import { useState, useEffect } from 'react'
-import { TAcks } from './staticData'
+import { TData } from './TData'
 import Button from '../../../components/Button/Button'
-import Ack from './Ack/Ack'
 import AckDef from './AckDef/AckDef'
 import SPListLinkParser from './SPListLinkParser';
 import {
@@ -22,15 +21,19 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
   const [selectedAck, setSelectedAck] = useState<string | null>(null)
   const [acksList, setAcksList] = useState<string[]>([])
   const [definition, setDefinition] = useState<string | null>(null)
-  const [listData, setListData] = useState<TAcks[] | null>(null)
+  const [listData, setListData] = useState<TData[] | null>(null)
   const [letterMap, setLetterMap] = useState<Map<string, Map<string, string>>>(new Map())
 
   const handleClickLetter = (letter: string) => {
     if (selectedLetter !== letter) {
       setSelectedLetter(letter)
+      setSelectedAck(null)
+      setDefinition(null)
       return
     } else {
       setSelectedLetter(null)
+      setSelectedAck(null)
+      setDefinition(null)
       return
     }
   }
@@ -41,13 +44,14 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
       return
     } else {
       setSelectedAck(null)
+      setDefinition(null)
       return
     }
   }
 
-  const getLetters = () =>{
+  const getLetters = () => {
     if (!listData) return null
-    return listData.map((listItem)=>{return Object.keys(listItem)[0].charAt(0)})
+    return listData.map((listItem) => { return Object.keys(listItem)[0].charAt(0) })
   }
 
   const getULetters = () => {
@@ -58,16 +62,16 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
         uniqueLetters.push(letter);
       }
       return uniqueLetters;
-    }, []);
+    }, [])
   }
 
-  const initializeLetterMap = () =>{
+  const initializeLetterMap = () => {
     const uLetters = getULetters()
 
     if (!uLetters || !listData) return null
 
     const tempLetterMap = letterMap
-    uLetters.forEach((val)=>{
+    uLetters.forEach((val) => {
       const tempMap = new Map<string, string>()
 
       listData.filter((item) => {
@@ -159,23 +163,33 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
     setData()
   }, [props.spListLink])
 
-  useEffect(()=>{
+  // Lazy Coding practice, fix before prod
+  useEffect(() => {
     initializeLetterMap()
   }, [listData])
 
   return (
     <div className={styles.wrapper}>
       <div className={`${styles.flex} ${styles.center} ${styles.acronym_web_part}`}>
-        <div className={`${styles.flex} ${styles.col} ${styles.acronym_letters}`}>
-          {getULetters()?.map((key) => {
+        <div className={`${styles.flex} ${styles.col} ${styles.acronym_letters} ${styles.scroll_y}`}>
+          {getULetters()?.sort((a, b)=>{return a.localeCompare(b)}).map((key) => {
             return (
-              <Button key={'button' + '_' + key} keyofAcronym={key} selectedLetter={selectedLetter} onClick={() => { handleClickLetter(key) }}>
-                {key.toUpperCase()}
+              <Button key={'button_letter' + '_' + key} keyofAcronym={key} selectedLetter={selectedLetter} onClick={() => { handleClickLetter(key) }}>
+                {key}
               </Button>
             )
           })}
         </div>
-        <Ack acks={acksList} handleClickAck={handleClickAck} selectedAck={selectedAck ?? ""} />
+        <div className={`${styles.flex} ${styles.col} ${styles.acronym_ack} ${styles.scroll_y}`}>
+          {acksList.sort((a,b)=>{return a.localeCompare(b)}).map((ack) => {
+            if (!ack) return null
+            return (
+              <Button key={'button_letters'+'_' + ack} keyofAcronym={ack} selectedLetter={selectedAck} onClick={()=>{ handleClickAck(ack)}}>
+                {ack}
+              </Button>
+            )
+          })}
+        </div>
         <div className={`${styles.flex} ${styles.center} ${styles.col} ${styles.acronym_def}`}>
           <AckDef def={definition} />
         </div>

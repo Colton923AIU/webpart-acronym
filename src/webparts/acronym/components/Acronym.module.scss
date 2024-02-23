@@ -46,73 +46,33 @@ $font-family: 'Open Sans';
   align-items: center;
 }
 
-.wrapper {
-  @include FlexCenter();
-  width: 100%;
-  height: 100%;
-}
-
 @mixin ScrollY {
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: inherit;
 }
-
-.acronym_letters {
-  box-shadow: 1px 1px 0px darken($aiu-blue, 20%);
-  max-width: 100px;
-  @include ScrollY();
+.scroll_y {
+  @include ScrollY;
 }
-
-.acronym_letters::-webkit-scrollbar {
+.scroll_y::-webkit-scrollbar {
   width: 2px;
 }
-
-.acronym_letters::-webkit-scrollbar-thumb {
+.scroll_y::-webkit-scrollbar-thumb {
   background-color: darken($aiu-blue, 20%); 
   border-radius: 8px; 
 }
-
-.acronym_letters::-webkit-scrollbar-track {
+.scroll_y::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
-.acronym_letters::-webkit-scrollbar-corner {
+.scroll_y::-webkit-scrollbar-corner {
   display: none;
 }
 
-.acronym_ack {
-  max-width: 180px;
-  @include ScrollY();
-}
-
-.acronym_ack::-webkit-scrollbar {
-  width: 2px;
-  padding: 2rem 0;
-}
-
-.acronym_ack::-webkit-scrollbar-thumb {
-  background-color: darken($aiu-blue, 20%); 
-  border-radius: 8px; 
-}
-
-.acronym_ack::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-.acronym_ack::-webkit-scrollbar-corner {
-  display: none;
-}
-
-.acronym_def {
+.wrapper {
   @include FlexCenter();
-  @include TextInverse();
-
-  height: 100%;
   width: 100%;
-  padding: 3px;
-  margin: 3px;
+  height: 100%;
 }
 
 .acronym_web_part {
@@ -120,14 +80,46 @@ $font-family: 'Open Sans';
   max-width: 768px;
   height: 100%;
   max-height: 450px;
-  border-radius: 1px solid $aiu-blue;
-  border-radius: 3px;
+
+  border-radius: 3px solid $aiu-blue;
+  border-radius: 15px;
+  box-shadow: 0px 0px 3px 1px darken($aiu-blue, 20%);
+
   padding: 3px;
   margin: 3px;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.acronym_letters {
+  max-width: 100px;
+  height: 100%;
+  margin: 2rem 3px;
+  min-height: 400px;
+}
+
+.acronym_ack {
+  max-width: 230px;
+  margin: 2rem 3px;
+  height: 100%;
+  min-height: 400px;
+}
+
+.acronym_def {
+  @include FlexCenter();
+
+  color: $aiu-blue;
+  font-size: 2rem;
+  font-weight: 400;
+
+  height: 100%;
+  width: 100%;
+  margin: 3px;
+  
+  min-height: 400px;
 }
 
 .flex {
