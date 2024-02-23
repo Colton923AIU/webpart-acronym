@@ -8,18 +8,18 @@
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "",
-      "websiteUrl": "",
+      "name": "Colton McClintock",
+      "websiteUrl": "colton923@gmail.com",
       "privacyUrl": "",
       "termsOfUseUrl": "",
       "mpnId": "Undefined-1.18.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "spfx-template description"
+        "default": "Acronym from SP-Lists Widget"
       },
       "longDescription": {
-        "default": "spfx-template description"
+        "default": "Copy your SharePoint List link into the web part editor properties panel, and if your data is formatted appropriately (Acronym, Definition), then you will have a nice display for this data."
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "spfx-template Feature",
-        "description": "The feature that activates elements of the spfx-template solution.",
+        "title": "Data from your Sharepoint List",
+        "description": "The feature lets your acronym display widget be flexible and get data dynamically from your SharePoint List.",
         "id": "ff48961e-7467-43cb-935c-abde82b27042",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/spfx-template.sppkg"
+    "zippedPackage": "solution/webpart-acronym.sppkg"
   }
 }
