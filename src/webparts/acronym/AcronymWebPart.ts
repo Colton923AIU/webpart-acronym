@@ -14,6 +14,8 @@ import { IAcronymProps } from './components/IAcronymProps';
 
 export interface IAcronymWebPartProps {
   description: string;
+  spListLink: string;
+  absoluteUrl: string;
 }
 
 export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPartProps> {
@@ -29,7 +31,10 @@ export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPar
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        spListLink: this.properties.spListLink,
+        absoluteUrl: this.context.pageContext.web.absoluteUrl,
+        spHttpClient: this.context.spHttpClient,
       }
     );
 
@@ -41,8 +46,6 @@ export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPar
       this._environmentMessage = message;
     });
   }
-
-
 
   private _getEnvironmentMessage(): Promise<string> {
     if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
@@ -102,7 +105,7 @@ export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPar
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: strings.PropertyPaneDescription,
           },
           groups: [
             {
@@ -110,6 +113,9 @@ export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPar
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneTextField('spListLink', {
+                  label: strings.SPListLinkLabel
                 })
               ]
             }

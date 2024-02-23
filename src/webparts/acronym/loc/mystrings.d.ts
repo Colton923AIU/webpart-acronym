@@ -1,7 +1,9 @@
 declare interface IAcronymWebPartStrings {
   PropertyPaneDescription: string;
+  PropertyPaneSPListLink: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
+  SPListLinkLabel: string;
   AppLocalEnvironmentSharePoint: string;
   AppLocalEnvironmentTeams: string;
   AppLocalEnvironmentOffice: string;
