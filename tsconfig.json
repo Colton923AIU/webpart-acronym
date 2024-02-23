@@ -26,13 +26,12 @@
       "DOM",
       "es2015.collection",
       "ES2015.Promise"
-    ]
+    ],
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "lib"
+    "node_modules"
   ]
 }

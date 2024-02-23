@@ -1,5 +1,3 @@
-import StylexPlugin from '@stylexjs/webpack-plugin'
-
 /*
 * User webpack settings file. You can add your own settings here.
 * Changes from this file will be merged into the base webpack configuration file.
@@ -23,18 +21,6 @@ const webpackConfig = {
 const transformConfig = function (initialWebpackConfig, webpack) {
   // transform the initial webpack config here, i.e.
   // initialWebpackConfig.plugins.push(new webpack.Plugin()); etc.
-  initialWebpackConfig.plugins.push(
-    new StylexPlugin({
-      filename: 'styles.[contenthash].css',
-      dev: true,
-      runtimeInjection: false,
-      classNamePrefix: 'x',
-      unstable_moduleResolution: {
-        type: 'commonJS',
-        rootDir: "src"
-      },
-    }),
-  )
   return initialWebpackConfig;
 }
 

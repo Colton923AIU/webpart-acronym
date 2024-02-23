@@ -8,22 +8,22 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'TemplateWebPartStrings';
-import Template from './components/Template';
-import { ITemplateProps } from './components/ITemplateProps';
+import * as strings from 'AcronymWebPartStrings';
+import Acronym from './components/Acronym';
+import { IAcronymProps } from './components/IAcronymProps';
 
-export interface ITemplateWebPartProps {
+export interface IAcronymWebPartProps {
   description: string;
 }
 
-export default class TemplateWebPart extends BaseClientSideWebPart<ITemplateWebPartProps> {
+export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
   public render(): void {
-    const element: React.ReactElement<ITemplateProps> = React.createElement(
-      Template,
+    const element: React.ReactElement<IAcronymProps> = React.createElement(
+      Acronym,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,

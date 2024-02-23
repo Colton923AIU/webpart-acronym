@@ -1,0 +1,146 @@
+// https://sass-lang.com/guide/
+$aiu-blue: #0065A4;
+$font-family: 'Open Sans';
+
+* {
+  font-family: $font-family;
+}
+
+@mixin Text($color: #fff, $bg: $aiu-blue, $ta: center, $fz: 1.5rem, $fw: 800, $td: uppercase) {
+  color: $color;
+  background-color: $bg;
+  text-align: $ta;
+  background-color: $bg;
+  padding: 3px;
+  font-size: $fz;
+  font-weight: $fw;
+  border-radius: 8px;
+  border: 1px solid $color;
+  margin: 3px;
+  min-width: 20px;
+  min-height: 30px;
+  text-decoration: $td;
+  text-shadow: 1px 1px 3px darken($bg,40%);
+}
+
+@mixin TextInverse($color: $aiu-blue, $bg: white, $ta: center, $fz: 1.5rem, $fw: 800, $td: uppercase) {
+  color: $color;
+  background-color: $bg;
+  text-align: $ta;
+  background-color: $bg;
+  padding: 3px;
+  font-size: $fz;
+  font-weight: $fw;
+  border-radius: 8px;
+  border: 1px solid $color;
+  margin: 3px;
+  min-width: 20px;
+  min-height: 30px;
+  text-decoration: $td;
+  text-shadow: -1px -1px 0px lighten($color,60%);
+}
+
+@mixin FlexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  @include FlexCenter();
+  width: 100%;
+  height: 100%;
+}
+
+@mixin ScrollY {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: inherit;
+}
+
+.acronym_letters {
+  box-shadow: 1px 1px 0px darken($aiu-blue, 20%);
+  max-width: 100px;
+  @include ScrollY();
+}
+
+.acronym_letters::-webkit-scrollbar {
+  width: 2px;
+}
+
+.acronym_letters::-webkit-scrollbar-thumb {
+  background-color: darken($aiu-blue, 20%); 
+  border-radius: 8px; 
+}
+
+.acronym_letters::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.acronym_letters::-webkit-scrollbar-corner {
+  display: none;
+}
+
+.acronym_ack {
+  max-width: 180px;
+  @include ScrollY();
+}
+
+.acronym_ack::-webkit-scrollbar {
+  width: 2px;
+  padding: 2rem 0;
+}
+
+.acronym_ack::-webkit-scrollbar-thumb {
+  background-color: darken($aiu-blue, 20%); 
+  border-radius: 8px; 
+}
+
+.acronym_ack::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.acronym_ack::-webkit-scrollbar-corner {
+  display: none;
+}
+
+.acronym_def {
+  @include FlexCenter();
+  @include TextInverse();
+
+  height: 100%;
+  width: 100%;
+  padding: 3px;
+  margin: 3px;
+}
+
+.acronym_web_part {
+  width: 100%;
+  max-width: 768px;
+  height: 100%;
+  max-height: 450px;
+  border-radius: 1px solid $aiu-blue;
+  border-radius: 3px;
+  padding: 3px;
+  margin: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.center {
+  justify-content: center;
+}
+
+.col {
+  flex-direction: column;
+}

@@ -1,4 +1,4 @@
-export interface ITemplateProps {
+export interface IAcronymProps {
   description: string;
   isDarkTheme: boolean;
   environmentMessage: string;

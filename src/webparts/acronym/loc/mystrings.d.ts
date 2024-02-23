@@ -1,4 +1,4 @@
-declare interface ITemplateWebPartStrings {
+declare interface IAcronymWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
@@ -13,7 +13,7 @@ declare interface ITemplateWebPartStrings {
   UnknownEnvironment: string;
 }
 
-declare module 'TemplateWebPartStrings' {
-  const strings: ITemplateWebPartStrings;
+declare module 'AcronymWebPartStrings' {
+  const strings: IAcronymWebPartStrings;
   export = strings;
 }

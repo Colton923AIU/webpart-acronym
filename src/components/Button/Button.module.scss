@@ -1,0 +1,92 @@
+$aiu-blue: #0065A4;
+$font-family: 'Open Sans';
+
+@mixin Text($color: #fff, $bg: $aiu-blue, $ta: center, $fz: 1.5rem, $fw: 800, $td: uppercase) {
+    color: $color;
+    background-color: $bg;
+    text-align: $ta;
+    background-color: $bg;
+    padding: 3px;
+    font-size: $fz;
+    font-weight: $fw;
+    border-radius: 8px;
+    border: 1px solid $color;
+    margin: 3px;
+    text-decoration: $td;
+}
+
+@mixin TextInverse($color: $aiu-blue, $bg: white, $ta: center, $fz: 1.5rem, $fw: 800, $td: uppercase) {
+    color: $color;
+    background-color: $bg;
+    text-align: $ta;
+    background-color: $bg;
+    padding: 3px;
+    font-size: $fz;
+    font-weight: $fw;
+    border-radius: 8px;
+    border: 1px solid $color;
+    margin: 3px;
+    text-decoration: $td;
+}
+
+@mixin FlexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.min_size {
+    min-width: 50px;
+    min-height: 50px;
+}
+
+
+.letter {
+    @include FlexCenter();
+    @include Text();
+
+    padding: 8px;
+    margin: 3px;
+    box-shadow: inset 1px 2px 2px lighten($aiu-blue, 40%), inset -2px -1px 2px darken($aiu-blue, 40%) 1px 1px 0px 1px black;
+
+    cursor: pointer;
+}
+
+
+
+.selected_letter {
+    @include FlexCenter();
+    @include TextInverse();
+    
+    @keyframes click-in {
+        from {
+            transform: translate(1px,1px);
+        }
+
+        70% {
+            transform: translate(1px,2px);
+        }
+
+        to {
+            transform: translate(1px,1px);
+        }
+    }
+
+    position: sticky;
+    top: 3px;
+    bottom: 3px;
+
+    padding: 8px;
+    margin: 3px;
+    box-shadow: inset 0px 1px 1px darken($aiu-blue, 40%), inset -1px 0px 1px lighten($aiu-blue, 40%), -1px -1px 0px 1px black;
+
+    cursor: pointer;
+
+    animation: click-in 1.5s ease-in forwards;
+}
+
+.letter:hover {
+    color: $aiu-blue;
+    background-color: white;
+    box-shadow: inset 0px 1px 1px darken($aiu-blue, 40%), inset -1px 0px 1px lighten($aiu-blue, 40%), -1px -1px 0px 1px black;
+}
