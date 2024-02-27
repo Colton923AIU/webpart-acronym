@@ -12,10 +12,10 @@
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
     "group": { "default": "Advanced" },
     "title": { "default": "Acronym" },
-    "description": { "default": "Acronym from " },
+    "description": { "default": "Acronym" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "template"
+      "description": "Acronym"
     }
   }]
 }

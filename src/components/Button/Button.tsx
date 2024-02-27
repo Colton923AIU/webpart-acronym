@@ -1,23 +1,51 @@
-import * as React from 'react'
-import styles from './Button.module.scss'
+import * as React from "react";
+import styles from "./Button.module.scss";
 
 interface IButtonProps {
-  onClick: (keyofAcronym: string) => void,
-  keyofAcronym: string,
-  selectedLetter?: string | null,
-  children: React.ReactNode
+  onClick: (keyofAcronym: string) => void;
+  keyofAcronym: string;
+  selectedLetter?: string | null;
+  children: React.ReactNode;
+  variant?: "letter" | "acronym";
 }
 
-const Button = ({ onClick, keyofAcronym, selectedLetter, children }: IButtonProps) => {
+const Button = ({
+  onClick,
+  keyofAcronym,
+  selectedLetter,
+  children,
+  variant,
+}: IButtonProps) => {
+  const getClassName = () => {
+    let cn = styles.min_size;
 
-  if (keyofAcronym == "") return null
+    if (variant === "acronym") {
+      cn += ` ${styles.acronym}`;
+      if (selectedLetter === keyofAcronym) {
+        cn += ` ${styles.selected}`;
+      }
+    } else {
+      if (selectedLetter === keyofAcronym) {
+        cn += ` ${styles.selected_letter}`;
+      } else {
+        cn += ` ${styles.letter}`;
+      }
+    }
+
+    return cn;
+  };
+
+  if (keyofAcronym == "") return null;
   return (
-    <span className={selectedLetter === keyofAcronym ? `${styles.selected_letter} ${styles.min_size}` : `${styles.letter} ${styles.min_size}`} onClick={() => {
-      onClick(keyofAcronym)
-    }}>
+    <span
+      className={getClassName()}
+      onClick={() => {
+        onClick(keyofAcronym);
+      }}
+    >
       {children}
     </span>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

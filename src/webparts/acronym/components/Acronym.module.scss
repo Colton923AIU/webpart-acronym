@@ -1,12 +1,18 @@
-// https://sass-lang.com/guide/
-$aiu-blue: #0065A4;
-$font-family: 'Open Sans';
+$aiu-blue: #0065a4;
+$font-family: "Open Sans";
 
 * {
   font-family: $font-family;
 }
 
-@mixin Text($color: #fff, $bg: $aiu-blue, $ta: center, $fz: 1.5rem, $fw: 800, $td: uppercase) {
+@mixin Text(
+  $color: #fff,
+  $bg: $aiu-blue,
+  $ta: center,
+  $fz: 1.5rem,
+  $fw: 800,
+  $td: uppercase
+) {
   color: $color;
   background-color: $bg;
   text-align: $ta;
@@ -20,10 +26,17 @@ $font-family: 'Open Sans';
   min-width: 20px;
   min-height: 30px;
   text-decoration: $td;
-  text-shadow: 1px 1px 3px darken($bg,40%);
+  text-shadow: 1px 1px 3px darken($bg, 40%);
 }
 
-@mixin TextInverse($color: $aiu-blue, $bg: white, $ta: center, $fz: 1.5rem, $fw: 800, $td: uppercase) {
+@mixin TextInverse(
+  $color: $aiu-blue,
+  $bg: white,
+  $ta: center,
+  $fz: 1.5rem,
+  $fw: 800,
+  $td: uppercase
+) {
   color: $color;
   background-color: $bg;
   text-align: $ta;
@@ -37,7 +50,7 @@ $font-family: 'Open Sans';
   min-width: 20px;
   min-height: 30px;
   text-decoration: $td;
-  text-shadow: -1px -1px 0px lighten($color,60%);
+  text-shadow: -1px -1px 0px lighten($color, 80%);
 }
 
 @mixin FlexCenter {
@@ -51,22 +64,27 @@ $font-family: 'Open Sans';
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: inherit;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: opacify($aiu-blue, 0.5);
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
 }
+
 .scroll_y {
   @include ScrollY;
-}
-.scroll_y::-webkit-scrollbar {
-  width: 2px;
-}
-.scroll_y::-webkit-scrollbar-thumb {
-  background-color: darken($aiu-blue, 20%); 
-  border-radius: 8px; 
-}
-.scroll_y::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-.scroll_y::-webkit-scrollbar-corner {
-  display: none;
 }
 
 .wrapper {
@@ -76,50 +94,72 @@ $font-family: 'Open Sans';
 }
 
 .acronym_web_part {
-  width: 100%;
-  max-width: 768px;
-  height: 100%;
-  max-height: 450px;
-
-  border-radius: 3px solid $aiu-blue;
-  border-radius: 15px;
-  box-shadow: 0px 0px 3px 1px darken($aiu-blue, 20%);
-
-  padding: 3px;
-  margin: 3px;
+  width: 768px;
+  height: 430px;
 
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
+  overflow: hidden;
+
+  background-image: linear-gradient(
+    to right top,
+    #ffffff,
+    #fefefe,
+    #fdfdfd,
+    #fcfcfc,
+    #fbfbfb,
+    #fbfbfb,
+    #fafafa,
+    #fafafa,
+    #fafafa,
+    #fafafa,
+    #f9f9f9,
+    #f9f9f9
+  );
+  mix-blend-mode: multiply;
+  border-radius: 8px;
+
+  > div {
+    padding: 0.5rem;
+    height: 100%;
+
+    :first-child {
+      padding-top: 1rem;
+    }
+    :last-child {
+      padding-bottom: 1rem;
+    }
+  }
 }
 
 .acronym_letters {
-  max-width: 100px;
-  height: 100%;
-  margin: 2rem 3px;
-  min-height: 400px;
+  width: 120px;
+  background-color: rgba(0, 0, 0, 0.01);
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .acronym_ack {
-  max-width: 230px;
-  margin: 2rem 3px;
-  height: 100%;
-  min-height: 400px;
+  width: 230px;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .acronym_def {
   @include FlexCenter();
 
+  background-color: rgba(0, 0, 0, 0.01);
+
   color: $aiu-blue;
   font-size: 2rem;
   font-weight: 400;
+  text-align: center;
 
-  height: 100%;
   width: 100%;
-  margin: 3px;
-  
-  min-height: 400px;
+
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .flex {

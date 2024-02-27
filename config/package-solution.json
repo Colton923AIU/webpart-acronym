@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "spfx-template-client-side-solution",
+    "name": "acronym-webpart-version-1",
     "id": "f639c916-4b44-461d-9984-ad7aa4e3c35e",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
