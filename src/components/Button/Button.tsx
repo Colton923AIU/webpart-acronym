@@ -42,6 +42,7 @@ const Button = ({
       onClick={() => {
         onClick(keyofAcronym);
       }}
+      id={keyofAcronym}
     >
       {children}
     </span>

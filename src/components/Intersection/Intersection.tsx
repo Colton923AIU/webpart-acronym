@@ -17,7 +17,7 @@ const Intersection = ({ children }: IntersectionProps) => {
   const options = {
     root: null,
     rootMargin: "100px",
-    threshold: 0.9,
+    threshold: 0.6,
   };
 
   React.useEffect(() => {
