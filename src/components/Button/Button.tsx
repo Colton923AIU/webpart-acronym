@@ -19,17 +19,14 @@ const Button = ({
   const getClassName = () => {
     let cn = styles.min_size;
 
+    if (selectedLetter === keyofAcronym) {
+      cn += ` ${styles.selected_letter}`;
+    } else {
+      cn += ` ${styles.letter}`;
+    }
+
     if (variant === "acronym") {
       cn += ` ${styles.acronym}`;
-      if (selectedLetter === keyofAcronym) {
-        cn += ` ${styles.selected}`;
-      }
-    } else {
-      if (selectedLetter === keyofAcronym) {
-        cn += ` ${styles.selected_letter}`;
-      } else {
-        cn += ` ${styles.letter}`;
-      }
     }
 
     return cn;

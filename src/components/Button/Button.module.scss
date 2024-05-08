@@ -8,7 +8,7 @@ $font-family: "Open Sans";
   padding: 0.2rem 0;
 
   text-shadow: 1px 1px 0px $color, -1px -1px 0px $color, -1px 1px 0px $color,
-    1px -1px 0px $color;
+    1px -1px 0px $color, 1px 1px 3px black;
 }
 
 @mixin RegularText($color: $aiu-blue, $bg: #fff) {
@@ -16,6 +16,7 @@ $font-family: "Open Sans";
   background-color: $bg;
 
   padding: 0.2rem;
+  text-shadow: 0px 0px 1px black;
 }
 
 @mixin Text(
@@ -86,50 +87,43 @@ $font-family: "Open Sans";
   box-shadow: inset 1px 2px 2px lighten($aiu-blue, 40%),
     inset 0px 0px 2px darken($aiu-blue, 40%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
   cursor: pointer;
+
+  background-image: radial-gradient(
+    rgba(200, 200, 200, 0.33) 33%,
+    transparent 66%
+  );
+  background-blend-mode: soft-light;
 }
 
 .letter:hover {
   box-shadow: inset 1px 2px 2px darken($aiu-blue, 10%),
     inset 0px 0px 2px darken($aiu-blue, 20%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
+
+  background-image: radial-gradient(
+    rgba(100, 100, 100, 0.33) 33%,
+    transparent 66%
+  );
 }
 
 .selected_letter {
   @include FlexCenter();
   @include TextInverse($aiu-blue, #fff, center, 2rem, 800, outline);
 
-  box-shadow: inset 1px 2px 2px lighten(white, 40%),
-    inset 0px 0px 2px darken(white, 40%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 1px 2px 2px lighten(rgba(0, 0, 0, 0.5), 40%),
+    inset 0px 0px 2px darken(rgba(0, 0, 0, 0.5), 40%),
+    1px 1px 0px 1px rgba(0, 0, 0, 0.5);
   cursor: pointer;
+
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .selected_letter:hover {
-  box-shadow: inset 1px 2px 2px darken(white, 20%),
-    inset 0px 0px 2px darken(white, 60%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 1px 2px 2px darken(rgba(0, 0, 0, 0.5), 20%),
+    inset 0px 0px 2px darken(rgba(0, 0, 0, 0.5), 60%),
+    1px 1px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
 .acronym {
-  @include FlexCenter();
-  @include Text(#fff, $aiu-blue, center, 1rem, 600, regular);
-
-  box-shadow: inset 1px 2px 2px lighten($aiu-blue, 40%),
-    inset 0px 0px 2px darken($aiu-blue, 40%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
-.acronym:hover {
-  box-shadow: inset 1px 2px 2px darken($aiu-blue, 10%),
-    inset 0px 0px 2px darken($aiu-blue, 20%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
-}
-
-.selected {
-  background-color: #fff;
-  color: $aiu-blue;
-
-  box-shadow: inset 1px 2px 2px lighten(white, 40%),
-    inset 0px 0px 2px darken(white, 40%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
-}
-
-.selected:hover {
-  box-shadow: inset 1px 2px 2px darken(white, 20%),
-    inset 0px 0px 2px darken(white, 60%), 1px 1px 0px 1px rgba(0, 0, 0, 0.5);
+  font-size: 1.3rem;
+  padding: 0.2rem;
 }

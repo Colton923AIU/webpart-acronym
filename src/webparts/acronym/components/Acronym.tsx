@@ -8,7 +8,6 @@ import LetterCol from "./LetterCol";
 import AcronymCol from "./AcronymCol";
 import DefinitionCol from "./DefinitionCol";
 import SearchBar from "./SearchBar";
-import { getURL } from "./SPListLinkParser";
 
 export interface SPListItem {
   Acronym: string;
@@ -48,22 +47,50 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
   const [acksList, setAcksList] = useState<string[]>([]);
   const [definition, setDefinition] = useState<string | null>(null);
   const [listData] = useSharePointListData({
-    url:
-      getURL({
-        absoluteUrl: props.absoluteUrl,
-        spListLink: props.spListLink,
-      }) ?? "",
+    absoluteUrl: props.absoluteUrl,
+    spListLink: props.spListLink,
     client: props.spHttpClient,
   });
   const [letterMap] = useAcronymData({
     listData: listData,
   });
 
+  // const scrollToButtonLetter = (sel: string) => {
+  //   const buttonLetter = document.getElementById(sel.toUpperCase());
+  //   const letScroller = document.getElementById("let-scroller");
+
+  //   if (!buttonLetter || !letScroller) return;
+
+  //   setTimeout(() => {
+  //     buttonLetter.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "center",
+  //       inline: "nearest",
+  //     });
+  //   }, 500);
+  //   return;
+  // };
+
+  // const scrollToButtonLetters = (sel: string) => {
+  //   const buttonLetters = document.getElementById(sel);
+  //   const ackScroller = document.getElementById("ack-scroller");
+
+  //   if (!buttonLetters || !ackScroller) return;
+
+  //   setTimeout(() => {
+  //     buttonLetters.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "center",
+  //       inline: "nearest",
+  //     });
+  //   }, 500);
+  //   return;
+  // };
+
   const letterHandler = (letter: string) => {
     if (selectedLetter !== letter) {
       setSelectedLetter(letter);
-      setSelectedAck(null);
-      setDefinition(null);
+      // scrollToButtonLetter(letter);
       return;
     } else {
       setSelectedLetter(null);
@@ -76,12 +103,21 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
   const acronymHandler = (ack: string) => {
     if (selectedAck !== ack) {
       setSelectedAck(ack);
+      setDefinition(letterMap?.get(ack.charAt(0))?.get(ack) ?? null);
+      // scrollToButtonLetters(ack);
       return;
     } else {
       setSelectedAck(null);
       setDefinition(null);
       return;
     }
+  };
+
+  const definitionHandler = (def: string) => {
+    if (def !== definition) {
+      setDefinition(def);
+    }
+    return;
   };
 
   const searchHandler = ({
@@ -91,36 +127,20 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
     column: string;
     item: string;
   }) => {
-    const scrollToButtonLetter = (sel: string) => {
-      const buttonLetter = document.getElementById(sel);
-      buttonLetter?.scrollIntoView({ behavior: "smooth" });
-      return;
-    };
-
-    const scrollToButtonLetters = (sel: string) => {
-      const buttonLetters = document.getElementById(sel);
-      buttonLetters?.scrollIntoView({ behavior: "smooth" });
-      return;
-    };
     switch (column) {
       case "colOne": {
         letterHandler(item);
-        scrollToButtonLetter(item);
         break;
       }
       case "colTwo": {
-        setSelectedLetter(item.charAt(0));
-        scrollToButtonLetter(item.charAt(0));
-        setSelectedAck(item);
+        letterHandler(item.charAt(0));
         setTimeout(() => {
-          scrollToButtonLetters(item);
+          acronymHandler(item);
         }, 500);
         break;
       }
       case "colThree": {
-        setSelectedLetter(null);
-        setSelectedAck(null);
-        setDefinition(item);
+        definitionHandler(item);
         break;
       }
       default: {
@@ -138,7 +158,6 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
     return keys;
   };
 
-  // UseEffect for the Acronym's shorthand reactivity
   useEffect(() => {
     if (letterMap !== null && selectedLetter !== null) {
       const currAckMap = letterMap.get(selectedLetter);
@@ -155,15 +174,6 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
       setAcksList([""]);
     }
   }, [selectedLetter]);
-
-  // UseEffect for the Acronym's definition reactivity
-  useEffect(() => {
-    if (selectedLetter !== null) {
-      if (selectedAck !== null && letterMap !== null) {
-        setDefinition(letterMap.get(selectedLetter)?.get(selectedAck) ?? null);
-      }
-    }
-  }, [selectedAck]);
 
   if (!props.spListLink || listData === null || letterMap === null) return null;
 

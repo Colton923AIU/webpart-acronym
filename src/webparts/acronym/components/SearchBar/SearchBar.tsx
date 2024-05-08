@@ -143,7 +143,10 @@ const SearchBar = ({ searchHandler, letterMap }: ISearchBarProps) => {
         />
       </div>
       {searchResults ? (
-        <div id="searchOverlay" className={styles.hide}>
+        <div
+          id="searchOverlay"
+          className={`${styles.hide} ${styles.searchOverlay}`}
+        >
           {searching && searchInput !== ""
             ? Object.keys(searchResults).map((val) => {
                 return (

@@ -1,11 +1,13 @@
 import { SPHttpClient, type SPHttpClientResponse } from "@microsoft/sp-http";
 import * as React from "react";
 import type { ListTypes } from "../../webparts/acronym/components/Acronym";
+import { getURL } from "../../webparts/acronym/components/SPListLinkParser";
 
 export type TSPListData = Record<string, string>[];
 export interface ISPListData {
-  url: string; // URL to the users' SP List
   client: SPHttpClient; // SP Client for making fetch reqs
+  spListLink: string;
+  absoluteUrl: string;
 }
 
 /*
@@ -14,9 +16,14 @@ export interface ISPListData {
 */
 
 const useSharePointListData: ({
-  url,
   client,
-}: ISPListData) => [TSPListData | null] = ({ url, client }: ISPListData) => {
+  spListLink,
+  absoluteUrl,
+}: ISPListData) => [TSPListData | null] = ({
+  spListLink,
+  absoluteUrl,
+  client,
+}: ISPListData) => {
   const [listData, setListData] = React.useState<TSPListData | null>(null);
 
   const getSPListData = async (url: string) => {
@@ -39,15 +46,21 @@ const useSharePointListData: ({
         setListData(cleanData);
         return;
       }
-    } catch {
+    } catch (e) {
       console.log("Response from SP List Getter Failed");
+      console.log("error: ", e);
       return;
     }
   };
 
   React.useEffect(() => {
-    getSPListData(url);
-  }, [url]);
+    if (absoluteUrl && spListLink) {
+      const url = getURL({ absoluteUrl: absoluteUrl, spListLink: spListLink });
+      if (url) {
+        getSPListData(url);
+      }
+    }
+  }, [spListLink, absoluteUrl]);
 
   return [listData];
 };
