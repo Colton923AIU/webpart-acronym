@@ -41,7 +41,9 @@ const SearchBar = ({ searchHandler, letterMap }: ISearchBarProps) => {
       letterKeys().map((val: string) => {
         const map = localLetterMap.get(val);
         map?.forEach((val, key) => {
-          defs.push(val);
+          if (key !== "additionalInformation" && key !== "categories") {
+            defs.push(val);
+          }
         });
       });
 
@@ -75,6 +77,9 @@ const SearchBar = ({ searchHandler, letterMap }: ISearchBarProps) => {
     };
     const searchCol3 = (str: string) => {
       return defaultSearchObject(letterMap).colThree.filter((val) => {
+        if (val === null) {
+          return false;
+        }
         if (val.toLowerCase().indexOf(str) !== -1) {
           return true;
         }
@@ -148,13 +153,15 @@ const SearchBar = ({ searchHandler, letterMap }: ISearchBarProps) => {
           className={`${styles.hide} ${styles.searchOverlay}`}
         >
           {searching && searchInput !== ""
-            ? Object.keys(searchResults).map((val) => {
+            ? Object.keys(searchResults).map((val, idx) => {
+                if (!val) return null;
                 return (
-                  <div>
+                  <div key={`searchBar_${idx}`}>
                     {searchResults[val as keyof typeof searchResults].map(
-                      (item) => {
+                      (item, j) => {
                         return (
                           <div
+                            key={`innerSearch_${j}_${idx}`}
                             className={styles.item}
                             onClick={() => {
                               searchHandler({ column: val, item: item });

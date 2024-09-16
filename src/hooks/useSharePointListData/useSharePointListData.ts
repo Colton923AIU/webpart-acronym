@@ -3,7 +3,7 @@ import * as React from "react";
 import type { ListTypes } from "../../webparts/acronym/components/Acronym";
 import { getURL } from "../../webparts/acronym/components/SPListLinkParser";
 
-export type TSPListData = Record<string, string>[];
+export type TSPListData = Record<string, string | string[]>[];
 export interface ISPListData {
   client: SPHttpClient; // SP Client for making fetch reqs
   spListLink: string;
@@ -37,9 +37,13 @@ const useSharePointListData: ({
         });
       if (data) {
         const cleanData = data.value.map(
-          (item: Record<ListTypes, string | number | null | boolean>) => {
+          (
+            item: Record<ListTypes, string | number | null | boolean | string[]>
+          ) => {
             return {
               [item.Title as string]: item.Definition,
+              additionalInformation: item["ReferenceDetails"] || null,
+              categories: item.Category,
             };
           }
         );
@@ -54,12 +58,18 @@ const useSharePointListData: ({
   };
 
   React.useEffect(() => {
-    if (absoluteUrl && spListLink) {
-      const url = getURL({ absoluteUrl: absoluteUrl, spListLink: spListLink });
-      if (url) {
-        getSPListData(url);
+    const getListDataWrapper = async () => {
+      if (absoluteUrl && spListLink) {
+        const url = getURL({
+          absoluteUrl: absoluteUrl,
+          spListLink: spListLink,
+        });
+        if (url) {
+          await getSPListData(url);
+        }
       }
-    }
+    };
+    getListDataWrapper();
   }, [spListLink, absoluteUrl]);
 
   return [listData];

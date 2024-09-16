@@ -1,5 +1,5 @@
 const SPListLinkParser = (link: string) => {
-  let parsed = link;
+  const parsed = link;
   const parts = parsed.split("/")[parsed.split("/").indexOf("Lists") + 1];
   if (!parts) return null;
   return parts.replace(/%20/g, " ").split("?")[0];

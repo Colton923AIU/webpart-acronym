@@ -1,6 +1,6 @@
 {
   "name": "webpart-acronym",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=16.13.0 <17.0.0 || >=18.17.1 <19.0.0"
@@ -10,7 +10,7 @@
     "build": "gulp bundle",
     "clean": "gulp clean",
     "test": "gulp test",
-    "serve": "fast-serve",
+    "serve": "gulp serve",
     "package": "gulp package-solution --ship"
   },
   "dependencies": {
@@ -39,6 +39,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "gulp": "4.0.2",
     "spfx-fast-serve-helpers": "~1.18.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.5.3"
   }
 }

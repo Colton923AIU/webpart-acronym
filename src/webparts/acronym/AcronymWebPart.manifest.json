@@ -17,11 +17,11 @@
     {
       "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
       "group": { "default": "Advanced" },
-      "title": { "default": "Acronym" },
-      "description": { "default": "Acronym" },
+      "title": { "default": "AIUS Acronym Reference Guide" },
+      "description": { "default": "AIUS Acronym Reference Guide" },
       "officeFabricIconFontName": "Page",
       "properties": {
-        "description": "Acronym"
+        "description": "AIUS Acronym Reference Guide"
       }
     }
   ]

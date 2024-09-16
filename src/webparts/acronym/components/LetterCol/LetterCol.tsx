@@ -14,6 +14,28 @@ const LetterCol = ({
   letterHandler,
   selectedLetter,
 }: ILetterColProps) => {
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!scrolled) {
+      const letScroller = document.getElementById("let-scroller");
+      if (!letScroller) return;
+      setScrolled(true);
+      setTimeout(() => {
+        letScroller.scrollTo({
+          top: 75,
+          behavior: "smooth",
+        });
+        setTimeout(() => {
+          letScroller.scrollTo({
+            top: 25,
+            behavior: "smooth",
+          });
+        }, 1200);
+      }, 800);
+    }
+  }, []);
+
   return (
     <div
       className={`${styles.flex} ${styles.col} ${styles.acronym_letters} ${styles.scroll_y}`}

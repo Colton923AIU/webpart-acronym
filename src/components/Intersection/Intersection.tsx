@@ -10,7 +10,9 @@ const Intersection = ({ children }: IntersectionProps) => {
   const [isVisible, setIsVisible] = React.useState(true);
 
   const cbFn = (entries: any) => {
+    if (!entries) return;
     const [entry] = entries;
+    if (!entry) return;
     setIsVisible(entry.isIntersecting);
   };
 

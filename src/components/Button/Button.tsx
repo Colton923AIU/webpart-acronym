@@ -32,7 +32,7 @@ const Button = ({
     return cn;
   };
 
-  if (keyofAcronym == "") return null;
+  if (keyofAcronym === "") return null;
   return (
     <span
       className={getClassName()}

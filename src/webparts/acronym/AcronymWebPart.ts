@@ -9,11 +9,13 @@ import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "AcronymWebPartStrings";
 import Acronym from "./components/Acronym";
 import { IAcronymProps } from "./components/IAcronymProps";
+import { SPHttpClient } from "@microsoft/sp-http";
 
 export interface IAcronymWebPartProps {
   description: string;
   spListLink: string;
   absoluteUrl: string;
+  theme: string;
 }
 
 export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPartProps> {
@@ -22,8 +24,9 @@ export default class AcronymWebPart extends BaseClientSideWebPart<IAcronymWebPar
       Acronym,
       {
         spListLink: this.properties.spListLink,
+        theme: this.properties.theme,
         absoluteUrl: this.context.pageContext.web.absoluteUrl,
-        spHttpClient: this.context.spHttpClient,
+        spHttpClient: this.context.spHttpClient as unknown as SPHttpClient,
       }
     );
 

@@ -2,7 +2,7 @@ import * as React from "react";
 
 export type TAcronymData = Map<string, Map<string, string>>;
 export interface IAcronymData {
-  listData: Record<string, string>[] | null;
+  listData: Record<string, string | string[]>[] | null;
 }
 
 /*
@@ -18,7 +18,9 @@ const useAcronymData: ({ listData }: IAcronymData) => [TAcronymData | null] = ({
     Map<string, string>
   > | null>(null);
 
-  const initializeLetterMap = (listData: Record<string, string>[]) => {
+  const initializeLetterMap = (
+    listData: Record<string, string | string[]>[]
+  ) => {
     const uLetters = listData
       .map((listItem) => {
         return Object.keys(listItem)[0].charAt(0);
@@ -35,11 +37,13 @@ const useAcronymData: ({ listData }: IAcronymData) => [TAcronymData | null] = ({
 
     const tempLetterMap = new Map();
     uLetters.forEach((val) => {
-      const tempMap = new Map<string, string>();
+      const tempMap = new Map<string, string | string[]>();
 
       listData.filter((item) => {
         if (Object.keys(item)[0].charAt(0) === val) {
           tempMap.set(Object.keys(item)[0], item[Object.keys(item)[0]]);
+          tempMap.set("additionalInformation", item.additionalInformation);
+          tempMap.set("categories", item.categories);
         }
       });
       tempLetterMap.set(val, tempMap);
