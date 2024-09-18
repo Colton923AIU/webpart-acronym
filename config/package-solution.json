@@ -1,9 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "acronym-webpart-version-1010",
-    "id": "f639c916-4b44-461d-9984-ad7aa4e3c35e",
-    "version": "1.0.1.0",
+    "name": "acronym-webpart-version-2000",
+    "id": "f639c916-4b44-461d-9984-ad7aa4e3c36f",
+    "version": "2.0.2.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -30,11 +30,11 @@
         "title": "Data from your Sharepoint List",
         "description": "The feature lets your acronym display widget be flexible and get data dynamically from your SharePoint List.",
         "id": "ff48961e-7467-43cb-935c-abde82b27042",
-        "version": "1.0.1.0"
+        "version": "2.0.1.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/webpart-acronym.sppkg"
+    "zippedPackage": "solution/webpart-acronym-new-id.sppkg"
   }
 }
