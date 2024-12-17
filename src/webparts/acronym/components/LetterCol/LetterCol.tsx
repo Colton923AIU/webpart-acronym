@@ -45,7 +45,7 @@ const LetterCol = ({
         return (
           <Intersection key={letter}>
             <Button
-              key={"button_letter" + "_" + letter}
+              key={"button_letter_" + letter}
               keyofAcronym={letter}
               selectedLetter={selectedLetter}
               onClick={() => {

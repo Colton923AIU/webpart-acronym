@@ -10,7 +10,6 @@ export interface IDefinitionColProps {
 }
 
 const DefinitionCol = (props: IDefinitionColProps) => {
-  console.log(props);
   return (
     <div
       className={`${styles.flex} ${styles.center} ${styles.col} ${styles.acronym_def}`}

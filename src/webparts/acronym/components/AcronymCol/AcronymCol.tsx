@@ -14,7 +14,6 @@ const AcronymCol = ({
   acronymHandler,
   selectedAcronym,
 }: IAcronymColProps) => {
-  console.log("acronyms: ", acronyms);
   return (
     <div
       className={`${styles.flex} ${styles.col} ${styles.acronym_ack} ${styles.scroll_y}`}
@@ -30,7 +29,7 @@ const AcronymCol = ({
         .map((ack) => {
           if (!ack) return null;
           return (
-            <Intersection key={"button_letters" + "_" + ack}>
+            <Intersection key={"button_letters_" + ack}>
               <Button
                 keyofAcronym={ack}
                 selectedLetter={selectedAcronym}

@@ -42,8 +42,8 @@ const useSharePointListData: ({
           ) => {
             return {
               [item.Title as string]: item.Definition,
-              additionalInformation: item["ReferenceDetails"] || null,
-              categories: item.Category,
+              additionalInformation: item.ReferenceDetails || null,
+              categories: item.Category as string[],
             };
           }
         );
@@ -51,7 +51,6 @@ const useSharePointListData: ({
         return;
       }
     } catch (e) {
-      console.log("Response from SP List Getter Failed");
       console.log("error: ", e);
       return;
     }
@@ -65,11 +64,13 @@ const useSharePointListData: ({
           spListLink: spListLink,
         });
         if (url) {
-          await getSPListData(url);
+          return await getSPListData(url);
+        } else {
+          return;
         }
       }
     };
-    getListDataWrapper();
+    getListDataWrapper() as unknown;
   }, [spListLink, absoluteUrl]);
 
   return [listData];

@@ -68,8 +68,15 @@ const Acronym: React.FC<IAcronymProps> = (props: IAcronymProps) => {
         return false;
       });
       if (!findInfo) return;
-      setAdditionalInformation(findInfo[0]["additionalInformation"] as string);
-      setCategories(findInfo[0]["categories"] as string[]);
+      const additionalInformation = findInfo[0].additionalInformation;
+      if (additionalInformation !== null) {
+        setAdditionalInformation(additionalInformation.toString());
+      }
+      const categories =
+        typeof findInfo[0].categories === "string"
+          ? [findInfo[0].categories]
+          : findInfo[0].categories;
+      setCategories(categories);
       return;
     } else {
       setSelectedAck(null);

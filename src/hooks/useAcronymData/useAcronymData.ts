@@ -42,7 +42,9 @@ const useAcronymData: ({ listData }: IAcronymData) => [TAcronymData | null] = ({
       listData.filter((item) => {
         if (Object.keys(item)[0].charAt(0) === val) {
           tempMap.set(Object.keys(item)[0], item[Object.keys(item)[0]]);
-          tempMap.set("additionalInformation", item.additionalInformation);
+          if (item.additionalInformation !== null) {
+            tempMap.set("additionalInformation", item.additionalInformation);
+          }
           tempMap.set("categories", item.categories);
         }
       });
